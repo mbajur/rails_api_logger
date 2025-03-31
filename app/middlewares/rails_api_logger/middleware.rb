@@ -20,7 +20,7 @@ module RailsApiLogger
       logging = log?(env, request)
       if logging
         env["INBOUND_REQUEST_LOG"] = InboundRequestLog.from_request(request, skip_request_body: skip_request_body?(env))
-        request.body.rewind if request.body.respond_to?(:read)
+        request.body.rewind if request.body.respond_to?(:rewind)
       end
       status, headers, body = @app.call(env)
       if logging
